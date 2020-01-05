@@ -22,40 +22,13 @@ public class MainActivity extends AppCompatActivity {
     EditText textSMS;
 
 
-    // 메인 에서 바꿈.
-    //ssm 브랜치에서만 보이는 주석입니다.
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // ssm에서 넣은 주석2
-        // ssm에서 넣은 주석 3 24132432254134134134
-
-        for(;;) {
-            //asdf
-            //asdf
-            //asdf
-            //asdf
-            //asdf
-            //asdf
-            break;
-        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for(int i = 0; i < 10; i++){
-            //의미없다
-            //의미없다
-            //의미없다.
-        }
-
-        for(int i = 0; i < 10; i++){
-            //의미없다
-            //의미없다
-            //의미없다.
-        }
         buttonSend = (Button) findViewById(R.id.buttonSend);
         textPhoneNo = (EditText) findViewById(R.id.editTextPhoneNo);
         textSMS = (EditText) findViewById(R.id.editTextSMS);
@@ -106,6 +79,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 추가함
     }
 }
