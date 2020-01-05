@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         textPhoneNo = (EditText) findViewById(R.id.editTextPhoneNo);
         textSMS = (EditText) findViewById(R.id.editTextSMS);
 
+        //추가했엉
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.SEND_SMS)){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
