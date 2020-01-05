@@ -31,6 +31,17 @@ public class MainActivity extends AppCompatActivity {
 
         // ssm에서 넣은 주석2
         // ssm에서 넣은 주석 3 24132432254134134134
+
+        for(;;) {
+            //asdf
+            //asdf
+            //asdf
+            //asdf
+            //asdf
+            //asdf
+            break;
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
