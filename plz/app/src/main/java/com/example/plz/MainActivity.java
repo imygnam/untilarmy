@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     EditText textPhoneNo;
     EditText textSMS;
 
+    //ssm 브랜치에서만 보이는 주석입니다.
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
