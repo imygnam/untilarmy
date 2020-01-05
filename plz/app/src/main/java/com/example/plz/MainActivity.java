@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     EditText textPhoneNo;
     EditText textSMS;
 
+    // 메인 에서 바꿈.
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
