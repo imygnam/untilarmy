@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class Description extends AsyncTask<Void, Void, Void> {
 
+        /*
         //진행바표시
         private ProgressDialog progressDialog;
 
@@ -135,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.show();
 
         }
+*/
 
         @Override
         protected Void doInBackground(Void... params) {
