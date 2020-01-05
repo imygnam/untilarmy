@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        for(int i = 0; i < 10; i++){
+            //의미없다
+            //의미없다
+            //의미없다.
+        }
+
         buttonSend = (Button) findViewById(R.id.buttonSend);
         textPhoneNo = (EditText) findViewById(R.id.editTextPhoneNo);
         textSMS = (EditText) findViewById(R.id.editTextSMS);
