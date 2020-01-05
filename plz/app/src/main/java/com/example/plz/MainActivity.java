@@ -51,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
             //의미없다.
         }
 
+        for(int i = 0; i < 10; i++){
+            //의미없다
+            //의미없다
+            //의미없다.
+        }
         buttonSend = (Button) findViewById(R.id.buttonSend);
         textPhoneNo = (EditText) findViewById(R.id.editTextPhoneNo);
         textSMS = (EditText) findViewById(R.id.editTextSMS);
