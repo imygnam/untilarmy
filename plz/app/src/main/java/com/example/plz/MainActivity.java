@@ -22,16 +22,16 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button buttonID;
+    EditText textID;
+    TextView textviewBJ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        Button buttonID;
-        EditText textID;
-        TextView textviewBJ;
 
         final GetBJ gbj = new GetBJ();
         super.onCreate(savedInstanceState);
