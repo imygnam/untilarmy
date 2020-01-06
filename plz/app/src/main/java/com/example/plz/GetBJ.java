@@ -5,55 +5,60 @@ import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
 
-public class GetBJ extends AsyncTask<Void, Void, Void> {
-
-
+public class GetBJ {
 
     private static String htmlPageURL = "https://www.acmicpc.net/user/";
 
     public String id;
-    public Elements mTitles;
+    public static String bj;
 
     String getBJ(String id){
         Log.d("getBJ start", id);
         int i =0;
         this.id = id;
-        doInBackground();
-        for(Element e: mTitles){
-            Log.d("getBJ for", i+"");
-            i++;
-            if(i==1) return e.text();
-        }
-        return "Error";
+        new Description().execute();
+        return bj;
     }
 
 
-    @Override
-    protected Void doInBackground(Void... params) {
-        try{
-            Log.d("getBJ for", "try 시작");
+    private class Description extends AsyncTask<Void, Void, Void> {
 
-            Document doc = Jsoup.connect("https://www.acmicpc.net/user/godgsds").get();
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
 
-            Log.d("getBJ for", "doc 받음");
+                Document doc = Jsoup.connect("https://www.acmicpc.net/user/"+id).get();
 
+                Elements titles = doc.select("td a"); //필요한 녀석만 꼬집어서 지정
 
-            //사이트 받기
-            Elements titles = doc.select("div.col-md-3 a");
-            Log.d("haha", htmlPageURL+id);
-            mTitles = titles;
+                Log.d("엘레멘트", titles+"");
 
-        } catch (IOException e) {
-            Log.d("err123", htmlPageURL+id);
-            e.printStackTrace();
+                if(titles.toString() != null) {
+                    String str = titles.toString();
+                    bj = "";
+                    int i =0;
+                    for(; str.charAt(i) != '>';i++){
+
+                    }
+                    Log.d("문제수 찾는중", ""+str.charAt(i));
+                    for(i++;str.charAt(i) != '<';i++){
+                        Log.d("문제수 찾는중", ""+bj);
+                        bj += str.charAt(i);
+                    }
+
+                }
+                else bj = null;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
-        return null;
     }
 
 

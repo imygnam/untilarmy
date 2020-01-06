@@ -19,12 +19,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,84 +66,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        //
-        new Description().execute();
-        //
-
-
-
-        //버튼 클릭이벤트
-        buttonSend.setOnClickListener(new View.OnClickListener() {
+        //ID 버튼 클릭이벤트
+        buttonID.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 //입력한 값을 가져와 변수에 담는다
-                String phoneNo = textPhoneNo.getText().toString();
-                String sms = textSMS.getText().toString();
+                Log.d("문제수 찾자", "찾자");
+                GetBJ getBJ = new GetBJ();
 
-                try {
-                    //전송
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phoneNo, null, sms, null, null);
-                    Toast.makeText(getApplicationContext(), "전송 완료!", Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "SMS faild, please try again later!", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-
+                textviewBJ.setText(getBJ.getBJ(textID.getText().toString()));
             }
         });
     }
-/*
-        buttonID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //입력한 값을 가져와 변수에 담는다
-                String ID = textID.getText().toString();
 
-                Log.d("독", "트라이전");
-                try{
-                    Document doc = Jsoup.connect("https://movie.naver.com/movie/running/current.nhn").get();
-
-                    Log.d("독", doc.toString());
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });*/
-
-    private class Description extends AsyncTask<Void, Void, Void> {
-
-        /*
-        //진행바표시
-        private ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            //진행다일로그 시작
-            progressDialog = new ProgressDialog(MainActivity.this);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("잠시 기다려 주세요.");
-            progressDialog.show();
-
-        }
-*/
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                Document doc = Jsoup.connect("https://www.acmicpc.net/user/godgsds").get();
-                Elements mElementDataSize = doc.select("td a"); //필요한 녀석만 꼬집어서 지정
-
-                Log.d("엘레멘트", mElementDataSize+"");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
 
 }
