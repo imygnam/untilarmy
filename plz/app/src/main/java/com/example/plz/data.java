@@ -1,6 +1,8 @@
 package com.example.plz;
 
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import io.realm.Realm;
@@ -8,30 +10,15 @@ import io.realm.RealmObject;
 import io.realm.RealmResults;
 
 public class data extends AppCompatActivity{
-    public class database extends RealmObject{
-        private String name;
-        private String num;
-        private String date;
 
-        public String getName(){
-            return name;
-        }
-        public String getNum(){
-            return num;
-        }
-        public  String getDate(){
-            return date;
-        }
-        public void setName(String name){
-            this.name = name;
-        }
-        public void setNum(String num){
-            this.num = num;
-        }
-        public void setDate(String date){
-            this.date = date;
-        }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
+
+
+
     public void setData(final String date, final String name, final String num){
         Realm.init(this);
         Realm mRealm = Realm.getDefaultInstance();
