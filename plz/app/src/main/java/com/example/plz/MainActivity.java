@@ -37,10 +37,7 @@ public class MainActivity extends AppCompatActivity {
     EditText textSMS;
     final EditText textID;
     final TextView textviewBJ;
-
-        final GetBJ gbj = new GetBJ();
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    final GetBJ gbj = new GetBJ();
 
 
         textID = (EditText) findViewById(R.id.editTextID);
