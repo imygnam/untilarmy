@@ -10,6 +10,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 
+
 public class GetBJ {
 
     private static String htmlPageURL = "https://www.acmicpc.net/user/";
@@ -24,8 +25,11 @@ public class GetBJ {
         this.id = id;
         t = 0;
         new Description().execute();
+
         while(true){
-            if(t == 1)break;
+            if(t == 1) break;
+            for(int q = 0; q < 100; q++){
+            }
         }
         return bj;
     }
@@ -41,7 +45,6 @@ public class GetBJ {
 
                 Elements titles = doc.select("td a"); //필요한 녀석만 꼬집어서 지정
 
-                Log.d("엘레멘트", titles+"");
 
                 if(titles.toString() != null) {
                     String str = titles.toString();
@@ -50,9 +53,7 @@ public class GetBJ {
                     for(; str.charAt(i) != '>';i++){
 
                     }
-                    Log.d("문제수 찾는중", ""+str.charAt(i));
                     for(i++;str.charAt(i) != '<';i++){
-                        Log.d("문제수 찾는중", ""+bj);
                         bj += str.charAt(i);
                     }
 
@@ -62,7 +63,9 @@ public class GetBJ {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                t = 1;
             }
+            t = 1;
             return null;
         }
     }
