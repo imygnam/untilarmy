@@ -6,22 +6,39 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
-
+<<<<<<< HEAD
+=======
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-
+import android.widget.Toast;
+>>>>>>> ssm
 
 
 public class MainActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.SEND_SMS)){
+=======
+    Button buttonSend;
     Button buttonID;
+    EditText textPhoneNo;
+    EditText textSMS;
     EditText textID;
     TextView textviewBJ;
 
@@ -32,14 +49,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        buttonSend = (Button) findViewById(R.id.buttonSend);
+        textPhoneNo = (EditText) findViewById(R.id.editTextPhoneNo);
+        textSMS = (EditText) findViewById(R.id.editTextSMS);
         textID = (EditText) findViewById(R.id.editTextID);
         buttonID = (Button) findViewById(R.id.sendID);
         textviewBJ = (TextView) findViewById(R.id.textviewBJ);
 
-
+        //추가했엉
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
-
+>>>>>>> ssm
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("문자");
                 builder.setMessage("님이 허용해줘야 앱이 돌아감");
@@ -59,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+<<<<<<< HEAD
+=======
+
         //ID 버튼 클릭이벤트
         buttonID.setOnClickListener(new View.OnClickListener() {
 
@@ -71,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 textviewBJ.setText(getBJ.getBJ(textID.getText().toString()));
             }
         });
+>>>>>>> ssm
     }
 
 
