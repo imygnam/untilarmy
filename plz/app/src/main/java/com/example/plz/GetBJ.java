@@ -16,12 +16,17 @@ public class GetBJ {
 
     public String id;
     public static String bj;
+    int t;
 
     String getBJ(String id){
         Log.d("getBJ start", id);
         int i =0;
         this.id = id;
+        t = 0;
         new Description().execute();
+        while(true){
+            if(t == 1)break;
+        }
         return bj;
     }
 
@@ -53,6 +58,7 @@ public class GetBJ {
 
                 }
                 else bj = null;
+                t = 1;
 
             } catch (IOException e) {
                 e.printStackTrace();
