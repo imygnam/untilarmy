@@ -11,40 +11,20 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 
 import android.os.Bundle;
-
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
-
+import io.realm.Realm;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Realm.init(this);
 
-
-    Button buttonSend;
-    Button buttonID;
-    EditText textPhoneNo;
-    EditText textSMS;
-    final EditText textID;
-    final TextView textviewBJ;
-    final GetBJ gbj = new GetBJ();
-
-
-        textID = (EditText) findViewById(R.id.editTextID);
-        buttonID = (Button) findViewById(R.id.sendID);
-        textviewBJ = (TextView) findViewById(R.id.textviewBJ);
-
-        //추가했엉
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -66,20 +46,80 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        //ID 버튼 클릭이벤트
-        buttonID.setOnClickListener(new View.OnClickListener() {
+        final Realm mRealm = Realm.getDefaultInstance();
+        myname mn = mRealm.where(myname.class).findFirst();
 
-            @Override
-            public void onClick(View v) {
-                //입력한 값을 가져와 변수에 담는다
-                Log.d("문제수 찾자", "찾자");
-                GetBJ getBJ = new GetBJ();
+        if(mn == null){
 
-                textviewBJ.setText(getBJ.getBJ(textID.getText().toString()));
+            AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this);
+
+            ad.setTitle("당신의 아이디");
+            ad.setMessage("잘 확인하고 입력하시오. 실수하면 지웠다 깔아야함.");
+
+            final EditText et = new EditText(MainActivity.this);
+            ad.setView(et);
+
+            ad.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final String value = et.getText().toString();
+                    dialog.dismiss();
+
+                    mRealm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            myname mkmn = realm.createObject(myname.class);
+                            mkmn.setName(value);
+                        }
+                    });
+
+                }
+            });
+            ad.show();
+        }
+
+        database db = mRealm.where(database.class).findFirst();
+
+        if(db == null) {
+            mn = mRealm.where(myname.class).findFirst();
+            final String name = mn.getName();
+            GetBJ getBJ = new GetBJ();
+            final String x = getBJ.getBJ(name);
+
+            mRealm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    database mkdb = realm.createObject(database.class);
+                    mkdb.setDate(sms_day.today());
+                    mkdb.setName(name);
+                    mkdb.setNum(x);
+                }
+            });
+
+            Toast myToast = Toast.makeText(this.getApplicationContext(), "출석체크 되었음", Toast.LENGTH_LONG);
+            myToast.show();
+        }
+        else {
+            if (db.getDate().equals(sms_day.today())) {
+            } else {
+                Toast myToast = Toast.makeText(this.getApplicationContext(), "출석체크 되었음", Toast.LENGTH_LONG);
+                myToast.show();
             }
-        });
+            mn = mRealm.where(myname.class).findFirst();
+            final String name = mn.getName();
+            GetBJ getBJ = new GetBJ();
+            final String x = getBJ.getBJ(name);
 
+            mRealm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    database mkdb = realm.where(database.class).equalTo("name", name).findFirst();
+                    mkdb.setDate(sms_day.today());
+                    mkdb.setName(name);
+                    mkdb.setNum(x);
+                }
+            });
+        }
     }
-
-
 }

@@ -20,7 +20,7 @@ public class data extends AppCompatActivity{
 
 
     public void setData(final String date, final String name, final String num){
-        Realm.init(this);
+
         Realm mRealm = Realm.getDefaultInstance();
 
         mRealm.executeTransaction(new Realm.Transaction() {
