@@ -24,6 +24,7 @@ public class GetBJ {
         int i =0;
         this.id = id;
         t = 0;
+
         new Description().execute();
 
         Log.d("문제수 찾는중", "시작" + t);
