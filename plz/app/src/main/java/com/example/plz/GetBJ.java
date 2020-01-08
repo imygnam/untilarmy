@@ -17,25 +17,14 @@ public class GetBJ {
 
     public String id;
     public static String bj;
-    int t;
 
     String getBJ(String id){
         Log.d("getBJ start", id);
         int i =0;
         this.id = id;
-        t = 0;
 
         new Description().execute();
 
-        Log.d("문제수 찾는중", "시작" + t);
-        while(true){
-            if(t == 1) break;
-            for(int q = 0; q < 100; q++){
-
-            }
-            Log.d("반복", ""+t);
-        }
-        Log.d("문제수 찾는중", "끝");
         return bj;
     }
 
@@ -50,8 +39,6 @@ public class GetBJ {
 
                 Elements titles = doc.select("td a"); //필요한 녀석만 꼬집어서 지정
 
-                Log.d("엘레멘트", titles+"");
-
                 if(titles.toString() != null) {
                     String str = titles.toString();
                     bj = "";
@@ -59,27 +46,25 @@ public class GetBJ {
                     for(; str.charAt(i) != '>';i++){
 
                     }
-                    Log.d("문제수 찾는중", ""+str.charAt(i));
                     for(i++;str.charAt(i) != '<';i++){
-                        Log.d("문제수 찾는중", ""+bj);
                         bj += str.charAt(i);
                     }
 
                 }
                 else bj = null;
-                Log.d("문제수 찾는중", "끌");
-                t = 1;
-
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.d("문제수 찾는중", "아웃");
-                t = 1;
             }
-            Log.d("문제수 찾는중", "끝자락" + t);
-            t = 1;
             return null;
         }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //크롤링 후에 하고싶은 일
+        }
     }
+
 
 
 }
