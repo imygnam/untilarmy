@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         if (db == null) ;
         else {
             if (db.getDate().equals(sms_day.today())) {
+                Toast myToast = Toast.makeText(this.getApplicationContext(), "이미 출석체크 되었음", Toast.LENGTH_LONG);
+                myToast.show();
             } else {
                 Toast myToast = Toast.makeText(this.getApplicationContext(), "출석체크 되었음", Toast.LENGTH_LONG);
                 myToast.show();
