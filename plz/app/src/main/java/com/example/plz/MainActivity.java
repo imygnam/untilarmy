@@ -1,5 +1,6 @@
 package com.example.plz;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -10,6 +11,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,13 +19,33 @@ import android.widget.Toast;
 import io.realm.Realm;
 
 
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+
+
 public class MainActivity extends AppCompatActivity {
+
+    String id;
+    String bj;
+    EditText textID;
+    TextView textviewBJ;
+    GetBJ gbj = new GetBJ();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Realm.init(this);
+
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
@@ -49,12 +71,14 @@ public class MainActivity extends AppCompatActivity {
         final Realm mRealm = Realm.getDefaultInstance();
         myname mn = mRealm.where(myname.class).findFirst();
 
-        if(mn == null){
+        if (mn == null) {
 
             AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this);
 
             ad.setTitle("당신의 아이디");
             ad.setMessage("잘 확인하고 입력하시오. 실수하면 지웠다 깔아야함.");
+
+            ////////
 
             final EditText et = new EditText(MainActivity.this);
             ad.setView(et);
@@ -87,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         database db = mRealm.where(database.class).findFirst();
 
-        if(db == null) ;
+        if (db == null) ;
         else {
             if (db.getDate().equals(sms_day.today())) {
             } else {
@@ -110,4 +134,44 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+    // 무조건 크롤링 끝나면 뜸
+    private class Description extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+
+                Document doc = Jsoup.connect("https://www.acmicpc.net/user/" + id).get();
+
+                Elements titles = doc.select("td a"); //필요한 녀석만 꼬집어서 지정
+
+                if (titles.toString() != null) {
+                    String str = titles.toString();
+                    bj = "";
+                    int i = 0;
+                    for (; str.charAt(i) != '>'; i++) {
+
+                    }
+
+                    for (i++; str.charAt(i) != '<'; i++) {
+                        bj += str.charAt(i);
+                        Log.d("푼문제수", bj);
+                    }
+
+                } else bj = null;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            textviewBJ.setText(bj);
+        }
+    }
+
+    //
+
 }
