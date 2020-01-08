@@ -20,7 +20,6 @@ import io.realm.Realm;
 
 
 import android.util.Log;
-import android.widget.Button;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -77,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
             ad.setTitle("당신의 아이디");
             ad.setMessage("잘 확인하고 입력하시오. 실수하면 지웠다 깔아야함.");
-
-            ////////
 
             final EditText et = new EditText(MainActivity.this);
             ad.setView(et);
