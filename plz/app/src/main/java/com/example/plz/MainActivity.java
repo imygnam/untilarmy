@@ -71,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
                         public void execute(Realm realm) {
                             myname mkmn = realm.createObject(myname.class);
                             mkmn.setName(value);
+                            database mkdb = realm.createObject(database.class);
+                            mkdb.setDate(sms_day.today());
+                            mkdb.setName(value);
+                            GetBJ getBJ = new GetBJ();
+                            String x = getBJ.getBJ(value);
+                            mkdb.setNum(x);
                         }
                     });
 
@@ -81,25 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         database db = mRealm.where(database.class).findFirst();
 
-        if(db == null) {
-            mn = mRealm.where(myname.class).findFirst();
-            final String name = mn.getName();
-            GetBJ getBJ = new GetBJ();
-            final String x = getBJ.getBJ(name);
-
-            mRealm.executeTransaction(new Realm.Transaction() {
-                @Override
-                public void execute(Realm realm) {
-                    database mkdb = realm.createObject(database.class);
-                    mkdb.setDate(sms_day.today());
-                    mkdb.setName(name);
-                    mkdb.setNum(x);
-                }
-            });
-
-            Toast myToast = Toast.makeText(this.getApplicationContext(), "출석체크 되었음", Toast.LENGTH_LONG);
-            myToast.show();
-        }
+        if(db == null) ;
         else {
             if (db.getDate().equals(sms_day.today())) {
             } else {
