@@ -38,4 +38,20 @@ public class sms_day extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    public static int days(String first, String last){
+        int x[] = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        String s[] = first.split("|");
+        String l[] = last.split("|");
+        int a = Integer.parseInt(s[1]);
+        int b = Integer.parseInt(l[1]);
+        int i = Integer.parseInt(s[2]);
+        int j = Integer.parseInt(l[2]);
+        while(true){
+            if(a == b) break;
+            j = x[b - 1] + j;
+            b--;
+        }
+        return j - i;
+    }
 }
