@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,8 +42,8 @@ public class sms_day extends AppCompatActivity {
 
     public static int days(String first, String last){
         int x[] = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        String s[] = first.split("|");
-        String l[] = last.split("|");
+        String[] s = first.split("\\|");
+        String[] l = last.split("\\|");
         int a = Integer.parseInt(s[1]);
         int b = Integer.parseInt(l[1]);
         int i = Integer.parseInt(s[2]);
